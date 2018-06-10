@@ -1,0 +1,79 @@
+apply plugin: 'java'
+apply plugin: 'war'
+
+group = 'com.epam.lab.java.web'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = //1.8
+        targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+//    maven { url 'https://jitpack.io' } // From GitHub
+//    mavenLocal()
+    mavenCentral()
+    jcenter() // BinTray
+}
+
+configurations {
+    testCompile.extendsFrom compileOnly
+    annotationProcessor.extendsFrom compileOnly
+}
+
+// turn sout`ing on in tests:
+test.testLogging.showStandardStreams = true
+
+// regexp: group: '([\w\.\d\-]*)', name: '([\w\.\d\-]*)', version: '([\d\.\+\-\w]+)'
+// replace: '$1:$2:$3'
+dependencies {
+
+    compile 'org.springframework:spring-context:+',
+
+            // AOP
+            'org.aspectj:aspectjrt:+',
+            'org.aspectj:aspectjweaver:+',
+            'aopalliance:aopalliance:+',
+
+            //Spring JDBC
+            'org.springframework:spring-jdbc:+',
+
+            // ORM
+            'org.hibernate:hibernate-spatial:+',
+            'org.hibernate:hibernate-validator:+',
+//            'org.hibernate:hibernate-java8:+',
+            'org.springframework:spring-orm:+',
+
+            'org.apache.logging.log4j:log4j-slf4j-impl:+',
+            'io.vavr:vavr:+',
+            'org.glassfish.jersey.containers:jersey-container-servlet:2.26-b03',
+            'org.glassfish.jersey.media:jersey-media-moxy:2.26-b03',
+            'com.fasterxml.jackson.core:jackson-databind:+',
+            'org.apache.tomcat:tomcat-websocket-api:+',
+            'javax.xml.bind:jaxb-api:+'
+
+    testCompile 'org.junit.jupiter:junit-jupiter-params:+',
+            'org.hamcrest:java-hamcrest:+',
+            'org.mockito:mockito-all:+',
+            'org.springframework:spring-test:+'
+
+    testRuntime 'org.junit.jupiter:junit-jupiter-engine:+',
+            'com.h2database:h2:+'
+
+    // To avoid compiler warnings about @API annotations in JUnit code
+    testCompileOnly 'org.apiguardian:apiguardian-api:+'
+
+    compileOnly 'org.projectlombok:lombok:+',
+            'edu.washington.cs.types.checker:checker-framework:+',
+            'org.apache.tomcat:tomcat-api:+',
+            'org.apache.tomcat:tomcat-jsp-api:+'
+}
+
+// type in terminal: gradle wrapper --gradle-version=4.8
+task wrapper(type: Wrapper) {
+    description = 'Generates gradlew[.bat] scripts'
+    gradleVersion = '4.8'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
