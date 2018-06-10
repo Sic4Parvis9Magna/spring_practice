@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="person" class="model.SimplePerson">
+        <property name="name" value="John Smith"/>
+        <property name="height" value="12"/>
+        <property name="age" value="35"/>
+        <property name="programmer" value="true"/>
+        <property name="country" ref="country"/>
+        <property name="contacts" ref="contact"/>
+    </bean>
+
+    <bean id="country" class="model.SimpleCountry">
+        <property name="name" value="Russia"/>
+        <property name="codeName" value="RU"/>
+    </bean>
+
+    <bean id="contact" class="model.SimpleContact">
+        <property name="type" value="EMAIL"/>
+        <property name="value" value="guava@google.com"/>
+    </bean>
+</beans>
