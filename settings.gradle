@@ -1,4 +1,5 @@
 rootProject.name = 'spring_practice'
 include 'lab3'
 include 'lab4'
+include 'lab5'
 
