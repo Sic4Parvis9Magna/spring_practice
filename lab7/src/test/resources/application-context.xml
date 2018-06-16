@@ -10,6 +10,7 @@
 
 
 
+	<!--<bean id="countryDao" class="dao.jpa.CountryJpaDaoImpl"/>-->
 	<bean id="instrumentationLoadTimeWeaver"
 		  class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
 
