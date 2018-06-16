@@ -1,9 +1,12 @@
 package dao.jpa;
 
 import model.Country;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 @Repository("countryJpaDao")
 public class CountryJpaDaoImpl extends AbstractJpaDao {
@@ -26,11 +29,13 @@ public class CountryJpaDaoImpl extends AbstractJpaDao {
 	public Country getCountryByName(String name) {
 		return mapEntityManager(entityManager ->
 				entityManager.createQuery(
-						"select c from SimpleCountry  where c.name = :name",
+						"select c from SimpleCountry c where c.name = :name",
 						Country.class)
 						.setParameter("name", name)
 						.getSingleResult()
 		);
 	}
+
+
 
 }
